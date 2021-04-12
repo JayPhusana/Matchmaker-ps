@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matchmaker</title>
+</head>
+
+<body>
+    <h1 style="text-align:center;"><i>Matchmaker&#9829</i></h1>
+    <p>My name is Jay. Do you think you know me well? Let's test it out!Here is a program that will figures out if you and I are meant to be.
+        You will answer 5 questions. To each question, answer 5
+        if you strongly agree, 4 if you agree, 3 if you neither
+        agree nor disagree, 2 if you disagree, and 1 if you
+        strongly disagree.</p>
+    <style>
+        body {background-color: rgb(250, 233, 215);}
+        p    {
+             align-self: center;
+             color: brown;
+            }
+        h1   {
+            color: brown;
+            font-size: 300%;
+            }
+        label{
+            color: chocolate;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 150%;
+            }
+    </style>
+
+    <!-- Rederence for HTML "option" tabs/fields: https://www.w3schools.com/tags/tag_option.asp-->
+    <label>How do I feel about icecream.</label><br />
+    <select id="q1">
+        <option value="5">Strongly Agree</option>
+        <option value="4"> Agree</option>
+        <option value="3">Neither agree nor disagree</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br /><br />
+    <label>How do I feel about avocado.</label><br />
+    <select id="q2">
+        <option value="5">Strongly Agree</option>
+        <option value="4"> Agree</option>
+        <option value="3">Neither agree nor disagree</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br /><br />
+    <label>The Office is the best show of all time.</label><br />
+    <select id="q3">
+        <option value="5">Strongly Agree</option>
+        <option value="4"> Agree</option>
+        <option value="3">Neither agree nor disagree</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br /><br />
+    <label>Legs day is the best day.</label><br />
+    <select id="q4">
+        <option value="5">Strongly Agree</option>
+        <option value="4"> Agree</option>
+        <option value="3">Neither agree nor disagree</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br /><br />
+    <label>Cyberpunk 2077 is great.</label><br />
+    <select id="q5">
+        <option value="5">Strongly Agree</option>
+        <option value="4"> Agree</option>
+        <option value="3">Neither agree nor disagree</option>
+        <option value="2">Disagree</option>
+        <option value="1">Strongly Disagree</option>
+    </select>
+    <br /><br />
+
+    <br /><br /><br />
+    <button onclick="calculateCompatibility()">Calculate Compatibility</button>
+    <p id="compatibility"></p>
+
+<script>
+console.log("Starting Matchmaker...")
+
+function calculateCompatibility() {
+    console.log("calculateCompatibility()")
+
+    const DESIRE_RESPONSE = [
+        5, /* strongly agree */
+        1, /* agree */
+        3, /* neither agree or disagree */
+        5, /* disagree */
+        1, /* strongly disagree */
+    ]
+
+    const MAX_SCORE = 25;
+
+    // Get the current values of the dropdown controls.
+    let question1Response = document.getElementById("q1").selectedOptions[0].value;
+    let question2Response = document.getElementById("q2").selectedOptions[0].value;
+    let question3Response = document.getElementById("q3").selectedOptions[0].value;
+    let question4Response = document.getElementById("q4").selectedOptions[0].value;
+    let question5Response = document.getElementById("q5").selectedOptions[0].value;
+    
+    // Optionally log the values associated with question 1 through 3 to the console.
+    console.log("Question 1 Answers:")
+    console.log(document.getElementById("q1").selectedOptions[0].text);
+    console.log(document.getElementById("q1").selectedOptions[0].value);
+    console.log(question1Response)
+
+    console.log("Question 2 Answers:")
+    console.log(document.getElementById("q2").selectedOptions[0].text);
+    console.log(document.getElementById("q2").selectedOptions[0].value);
+    console.log(question2Response)
+    
+    console.log("Question 3 Answers:")
+    console.log(document.getElementById("q3").selectedOptions[0].text);
+    console.log(document.getElementById("q3").selectedOptions[0].value);
+    console.log(question3Response)
+
+    console.log("Question 4 Answers:")
+    console.log(document.getElementById("q4").selectedOptions[0].text);
+    console.log(document.getElementById("q4").selectedOptions[0].value);
+    console.log(question4Response)
+
+    console.log("Question 5 Answers:")
+    console.log(document.getElementById("q5").selectedOptions[0].text);
+    console.log(document.getElementById("q5").selectedOptions[0].value);
+    console.log(question5Response)
+
+    // Todo: Calcilate Compatibility scores.
+    let question1Compatibility = 5 - Math.abs(question1Response - DESIRE_RESPONSE[0]);
+    let question2Compatibility = 5 - Math.abs(question2Response - DESIRE_RESPONSE[1]);
+    let question3Compatibility = 5 - Math.abs(question3Response - DESIRE_RESPONSE[2]);
+    let question4Compatibility = 5 - Math.abs(question4Response - DESIRE_RESPONSE[3]);
+    let question5Compatibility = 5 - Math.abs(question5Response - DESIRE_RESPONSE[4]);
+    
+    console.log("c1="+question1Compatibility);
+    console.log("c2="+question2Compatibility);
+    console.log("c3="+question3Compatibility);
+    console.log("c4="+question4Compatibility);
+    console.log("c5="+question5Compatibility);
+
+    // Calculate total compatibility.
+    let totalCompatibility = question1Compatibility + question2Compatibility + question3Compatibility + question4Compatibility + question5Compatibility;
+
+    // Convert totalCompatibility to a percentage.
+    totalCompatibility *= 100 / MAX_SCORE;
+    totalCompatibility = Math.round(totalCompatibility);
+    console.log("tc="+ totalCompatibility);
+    
+    document.getElementById("compatibility").innerHTML = "Your compatibility is: " + totalCompatibility;
+}
+</script>
+
+</body>
+</html>
